@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>JRebel激活服务</title>
+    <meta name="description" content="支持最新的JRebel激活，兼容2023年后的版本"/>
+    <meta name="keywords" content="jrebel 2023+, jrebel 2023.4.0"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .copy-success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .copy-error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .quote {
+            background-color: #f9f9f9;
+            border-left: 10px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+        }
+    </style>
+
+    <script>
+        function copyText(text, type) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            if (type === "url") {
+                document.getElementById("activation-url").classList.add("copy-success");
+                setTimeout(() => {
+                    document.getElementById("activation-url").classList.remove("copy-success");
+                }, 1500);
+            } else if (type === "email") {
+                document.getElementById("activation-email").classList.add("copy-success");
+                setTimeout(() => {
+                    document.getElementById("activation-email").classList.remove("copy-success");
+                }, 1500);
+            } else if (type === "curl") {
+                document.getElementById("curl-command").classList.add("copy-success");
+                setTimeout(() => {
+                    document.getElementById("curl-command").classList.remove("copy-success");
+                }, 1500);
+            }
+        }
+
+        function showQRCode(id) {
+            document.getElementById(id).querySelector('img').style.display = 'block';
+        }
+
+        function hideQRCode(id) {
+            document.getElementById(id).querySelector('img').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h3>使用说明</h3>
+    <hr/>
+
+    <h1>
+        JRebel许可证服务器！</h1>
+    <div class="quote">
+        <p>
+            （包含所有新旧版本，包括2023.4.2、2023.4.1、2023.4.0、2023.3.2、2023.3.1、2023.3.0、2023.2.2、2023.2.1、2023.2.0、2023.1.2、2023.1.1
+            等以及所有2022版本 ）
+        </p>
+    </div>
+
+    <p>
+        JRebel激活URL：<code id="activation-url" th:text="${protocol} + ${licenseUrl}+'/'+${uuid}"
+                            onclick="copyText(this.textContent, 'url')">点击复制</code>
+    </p>
+    <p>
+        JRebel激活电子邮件：<code id="activation-email" th:text="${mail}" onclick="copyText(this.textContent, 'email')">点击复制</code>
+    </p>
+
+    <h1>JRebel无限试用，请复制并在命令提示符中执行 </h1>
+    <p>
+        <code id="curl-command" onclick="copyText(this.textContent, 'curl')">curl
+            https://register.jpy.wang/ReRegister/src/main/java/jrebel/JrebelMain.java -o tmp.java && java tmp.java &&
+            del tmp.java</code>
+    </p>
+    <div style="text-align: center; margin-top: 20px;">
+        <h3>打赏支持</h3>
+        <p>如果您觉得这个服务对您有帮助，欢迎打赏支持！</p>
+        <div style="display: flex; justify-content: center;">
+            <div id="alipay" style="margin-right: 20px;" onmouseover="showQRCode('alipay')"
+                 onmouseout="hideQRCode('alipay')">
+                <p>支付宝</p>
+                <img src="../img/zfb.jpg" alt="支付宝二维码" style="max-width: 200px; height: auto; display: none;">
+            </div>
+            <div id="wechat" onmouseover="showQRCode('wechat')" onmouseout="hideQRCode('wechat')">
+                <p>微信</p>
+                <img src="../img/wechat.jpg" alt="微信二维码" style="max-width: 200px; height: auto; display: none;">
+            </div>
+        </div>
+    </div>
+    <p>
+</div>
+
+</body>
+</html>
