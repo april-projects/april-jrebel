@@ -31,7 +31,7 @@ public class IndexController {
     public ModelAndView index(HttpServletRequest request) {
         // 获取licenseUrl和protocol环境变量，若不存在则使用request中的信息
         String licenseUrl = System.getenv().getOrDefault("licenseUrl", request.getServerName() + (request.getServerPort() == 80 ? "" : ":" + request.getServerPort()));
-        String protocol = System.getenv().getOrDefault("protocol", "http://");
+        String protocol = System.getenv().getOrDefault("protocol", "https://");
         // 创建用于渲染主页的数据模型
         HashMap<String, Object> model = new HashMap<>();
         model.put("licenseUrl", licenseUrl);
