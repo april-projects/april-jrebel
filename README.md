@@ -16,10 +16,10 @@
 docker run -d --name april-jrebel --restart always -e PORT=9001 -p 9001:8080 mobaijun/april-jrebel:latest
 ~~~
 
-### 打开地址
+### 测试
 
 ~~~bash
-curl 192.168.20.129:9001
+curl localhost:9001
 ~~~
 
 ## 协作开发
