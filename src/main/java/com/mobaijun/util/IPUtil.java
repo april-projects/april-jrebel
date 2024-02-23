@@ -1,6 +1,12 @@
 package com.mobaijun.util;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 /**
  * Description: [IP 工具类]
@@ -8,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * Date: [2024/2/22 11:24]
  * IntelliJ IDEA Version: [IntelliJ IDEA 2023.1.4]
  */
+@Slf4j
 public class IPUtil {
 
     private final static String[] HEADERS = {
@@ -36,5 +43,29 @@ public class IPUtil {
             }
         }
         return request.getRemoteAddr();
+    }
+
+    /**
+     * 获取本机的IP地址
+     *
+     * @return 本机的IP地址
+     */
+    public static String getLocalIPv4Address() {
+        try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = interfaces.nextElement();
+                Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    InetAddress address = addresses.nextElement();
+                    if (!address.isLoopbackAddress() && address instanceof java.net.Inet4Address) {
+                        return address.getHostAddress();
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            log.error("Error occurred while retrieving local IPv4 address", e);
+        }
+        return null;
     }
 }
