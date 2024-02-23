@@ -13,7 +13,7 @@
 > 确保你的环境包含 `Docker` ,执行以下命令：
 
 ~~~bash
-docker run -d --name april-jrebel --restart always -e PORT=9001 -p 9001:8080 april-jrebel:1.0.0
+docker run -d --name april-jrebel --restart always -e PORT=9001 -p 9001:8080 april-jrebel:latest
 ~~~
 
 ### 打开地址
