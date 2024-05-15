@@ -30,7 +30,7 @@ public class JrebelController {
      */
     @PostMapping("/jrebel/leases")
     public void jrebelLeases(HttpServletRequest request, HttpServletResponse response) {
-        log.info("ip : {} ", IPUtil.getRemoteIp(request) + " -> " + request.getRequestURI());
+        jrebelValidateHandler(request, response);
         jrebelService.jrebelLeasesHandler(request, response);
     }
 
@@ -42,7 +42,7 @@ public class JrebelController {
      */
     @PostMapping("/jrebel/leases/1")
     public void jrebelLeases1(HttpServletRequest request, HttpServletResponse response) {
-        log.info("ip : {} ", IPUtil.getRemoteIp(request) + " -> " + request.getRequestURI());
+        jrebelValidateHandler(request, response);
         jrebelService.jrebelLeases1Handler(request, response);
     }
 
@@ -54,7 +54,7 @@ public class JrebelController {
      */
     @PostMapping("/agent/leases")
     public void agentLeases(HttpServletRequest request, HttpServletResponse response) {
-        log.info("ip : {} ", IPUtil.getRemoteIp(request) + " -> " + request.getRequestURI());
+        jrebelValidateHandler(request, response);
         jrebelService.jrebelLeasesHandler(request, response);
     }
 
@@ -66,7 +66,7 @@ public class JrebelController {
      */
     @PostMapping("/agent/leases/1")
     public void agentLeases1(HttpServletRequest request, HttpServletResponse response) {
-        log.info("ip : {} ", IPUtil.getRemoteIp(request) + " -> " + request.getRequestURI());
+        jrebelValidateHandler(request, response);
         jrebelService.jrebelLeases1Handler(request, response);
     }
 
@@ -78,7 +78,16 @@ public class JrebelController {
      */
     @PostMapping("/jrebel/validate-connection")
     public void jrebelValidateHandler(HttpServletRequest request, HttpServletResponse response) {
-        log.info("ip : {} ", IPUtil.getRemoteIp(request) + " -> " + request.getRequestURI());
+        jrebelLeasesHandler(request);
         jrebelService.jrebelValidateHandler(request, response);
+    }
+
+    /**
+     * 验证 JRebel 打印日志
+     *
+     * @param request 请求对象
+     */
+    private void jrebelLeasesHandler(HttpServletRequest request) {
+        log.info("ip : {} ", IPUtil.getRemoteIp(request) + " -> " + request.getRequestURI());
     }
 }
