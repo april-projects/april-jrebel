@@ -25,6 +25,6 @@ public class AprilJrebelApplication {
         String port = env.getProperty("server.port");
         String hostname = IPUtil.getLocalIPv4Address();
 
-        log.info("Service is running at: http://" + hostname + ":" + port);
+        log.info("Service is running at: http://{}:{}", hostname, port);
     }
 }
